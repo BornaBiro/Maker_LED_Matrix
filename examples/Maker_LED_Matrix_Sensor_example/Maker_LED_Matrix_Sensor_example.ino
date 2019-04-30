@@ -14,7 +14,7 @@
 //If you're using Maker LED Matrix 2 (with resolution of 32x9) than use this
 //Maker_LED_Matrix matrix(MAKER_LED_MATRIX_2);
 
-//...oterwise use this
+//...otherwise use this
 Maker_LED_Matrix matrix(MAKER_LED_MATRIX_4);
 
 Adafruit_BMP085 bmp;
@@ -51,7 +51,7 @@ void loop() {
   //Send new message to display.
   matrix.message(text, 100, 2, -1);
 
-  //Wait to display whole message, to read new data.
+  //Wait to display whole message to read new data.
   while(matrix.repeatCount() != 1) {
     delay(1);
   }

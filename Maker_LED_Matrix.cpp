@@ -332,6 +332,7 @@ uint8_t Maker_LED_Matrix::getPixel(int16_t x, int16_t y) {
 }
 
 void Maker_LED_Matrix::display() {
+	Wire.begin(IS31FL3731_SDA, IS31FL3731_SCL);
 	for(int k = 0; k<_n; k++) {
 		Wire.beginTransmission(_adr[k]);
 		Wire.write((byte)ISSI_COMMANDREGISTER);
@@ -380,6 +381,7 @@ void Maker_LED_Matrix::drawGrayscaleBitmap(int16_t x0, int16_t y0, uint8_t *p, u
 
 //---------------------------------LOW LEVEL CONTROL (do not change anythiny, only if you know what are you doing)---------------
 void Maker_LED_Matrix::writeData(uint8_t _adr, uint8_t b, uint8_t reg, uint8_t data) {
+	Wire.begin(IS31FL3731_SDA, IS31FL3731_SCL);
 	Wire.beginTransmission(_adr);
 	Wire.write((byte)ISSI_COMMANDREGISTER);
 	Wire.write(b);
