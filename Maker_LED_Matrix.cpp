@@ -33,7 +33,6 @@ void Maker_LED_Matrix::writeMessage() {
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->setCursor(0,0);
 	j->print(msgBuffer);                   //Send text to the left side of display (becouse display is made form 2 seperate LED matrix drivers that are not chained together).
-	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -53,7 +52,6 @@ void Maker_LED_Matrix::writePicture() {
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->drawBitmap(0, 0, _pic, _picSizeX, _picSizeY, _brightness, _backBrightness);
-	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -73,7 +71,6 @@ void Maker_LED_Matrix::writeGreyscale() {
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->drawGrayscaleBitmap(0, 0, (uint8_t*)_pic, _picSizeX, _picSizeY, _brightness);
-	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -93,8 +90,6 @@ void Maker_LED_Matrix::writeScroll() {
 	j->setOffset(0);
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position); 
-	userFunc();     
-	Wire.begin(4,5);
 	j->display();
 	_position -= _step;
 }
@@ -302,6 +297,13 @@ int Maker_LED_Matrix::repeatCount() {                  //Function retrun how man
 	return _messageRepeats;  
 }
 
+int16_t Maker_LED_Matrix::getPosition() {
+	return (_position*(-1));
+}
+
+int16_t Maker_LED_Matrix::getXSize() {
+	return (_scroll*(-1));
+}
 //---------------------------ADAFRUIT GFX----------------------------------
 void Maker_LED_Matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 	if(x > _maxPx) _maxPx = x;
@@ -379,7 +381,7 @@ void Maker_LED_Matrix::drawGrayscaleBitmap(int16_t x0, int16_t y0, uint8_t *p, u
 	}
 }
 
-//---------------------------------LOW LEVEL CONTROL (do not change anythiny, only if you know what are you doing)---------------
+//---------------------------------LOW LEVEL CONTROL (do not change anything, only if you know what are you doing)---------------
 void Maker_LED_Matrix::writeData(uint8_t _adr, uint8_t b, uint8_t reg, uint8_t data) {
 	Wire.begin(IS31FL3731_SDA, IS31FL3731_SCL);
 	Wire.beginTransmission(_adr);

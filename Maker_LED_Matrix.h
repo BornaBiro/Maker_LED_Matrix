@@ -73,6 +73,8 @@ class Maker_LED_Matrix : public Adafruit_GFX {
             void resumeScroll();                                  //Calling this function scrolling will continue.
             void deleteScroll();                                  //Function removes everything from screen and clears buffer.
             int repeatCount();                                    //Function return how much times message has been displayed
+			int16_t getPosition();
+			int16_t getXSize();
 			
             void drawPixel(int, int, int);
 			uint8_t getPixel(int16_t x, int16_t y);
