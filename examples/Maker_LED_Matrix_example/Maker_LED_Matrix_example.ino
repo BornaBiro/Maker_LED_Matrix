@@ -9,7 +9,7 @@
 //If you're using Maker LED Matrix 2 (with resolution of 32x9) than use this
 //Maker_LED_Matrix matrix(MAKER_LED_MATRIX_2);
 
-//...oterwise use this
+//...otherwise use this
 Maker_LED_Matrix matrix(MAKER_LED_MATRIX_4);
 
 //Let's make some bitmap picture. To convert your bitmap image to bytes, follow this tutorial https://learn.adafruit.com/steampunk-cameo-necklace/bitmaps-and-code
@@ -50,7 +50,7 @@ const uint8_t flame[288] = {
 
 void setup() {
   Serial.begin(9600);   //Fire up Serial monitor at 9600 bauds.
-  matrix.begin(&matrix);  //Init our library. As argument we are sending adress of out library object. It's nessery to do that, otherwise, we are unable to refresh LED Matrix.
+  matrix.begin(&matrix);  //Init our library. As argument we are sending address of out library object. It's nessery to do that, otherwise, we are unable to refresh LED Matrix.
   matrix.brightness(25, 1);   //Setup a new brightness. Setup font brigthenss at 25 of 255, and background at 1 of 255 (this makes backlight effect, put zero if you don't wanna that).
 
   //Finally, let's write something to display. Let's set 75 ms beetwen step and maketwo pixel steps and only one repet of message.

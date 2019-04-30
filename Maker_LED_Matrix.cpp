@@ -33,6 +33,7 @@ void Maker_LED_Matrix::writeMessage() {
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->setCursor(0,0);
 	j->print(msgBuffer);                   //Send text to the left side of display (becouse display is made form 2 seperate LED matrix drivers that are not chained together).
+	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -52,6 +53,7 @@ void Maker_LED_Matrix::writePicture() {
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->drawBitmap(0, 0, _pic, _picSizeX, _picSizeY, _brightness, _backBrightness);
+	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -71,6 +73,7 @@ void Maker_LED_Matrix::writeGreyscale() {
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position);            //Set cursor at the start of the display.
 	j->drawGrayscaleBitmap(0, 0, (uint8_t*)_pic, _picSizeX, _picSizeY, _brightness);
+	Wire.begin(4,5);
 	j->display();    //Display data that is written into buffer.
 	_position -= _step;                         //Increment counter for scrolling.
 }
@@ -91,6 +94,7 @@ void Maker_LED_Matrix::writeScroll() {
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position); 
 	userFunc();     
+	Wire.begin(4,5);
 	j->display();
 	_position -= _step;
 }
