@@ -90,6 +90,7 @@ void Maker_LED_Matrix::writeScroll() {
 	j->setOffset(0);
 	j->fillRect(0, 0, displayXSize, 9, _backBrightness);     //Delete everything from screen, using filled rect. that has same color (Brightness) sa background color.
 	j->setOffset(_position); 
+	userFunc();
 	j->display();
 	_position -= _step;
 }
@@ -339,21 +340,21 @@ void Maker_LED_Matrix::display() {
 		Wire.beginTransmission(_adr[k]);
 		Wire.write((byte)ISSI_COMMANDREGISTER);
 		Wire.write(0);
-		Wire.endTransmission();
+		Wire.endTransmission(0);
 		
 		Wire.beginTransmission(_adr[k]);
 		Wire.write((byte)0x24);
 		int i, j, n = 0, z;
-		for(i = 0; i<4; i++) {
+		for(i = 0; i<5; i++) {
 			for(j = 0;j<16;j++) {
 				Wire.write((byte)d.send[i][k][j]);
 			}
 		}
-		Wire.endTransmission();
+		Wire.endTransmission(0);
 		
 		Wire.beginTransmission(_adr[k]);
-		Wire.write((byte)0x24+64);
-		for(i = 4; i<9; i++) {
+		Wire.write((byte)0x24+80);
+		for(i = 5; i<9; i++) {
 			for(j = 0;j<16;j++) {
 				Wire.write((byte)d.send[i][k][j]);
 			}
